@@ -62,7 +62,12 @@ You will need to copy the credentials data to `PubSub/configs.py` under the key 
 }
 ```
 
-Then you will need to export two keys, `GOOGLE_CLOUD_PROJECT` and `GOOGLE_PUBSUB_SUB_ID` which will include the project-ID and the subscription-ID.
+Then you will need to export two keys as a system environment variables, `GOOGLE_CLOUD_PROJECT` and `GOOGLE_PUBSUB_SUB_ID` which will include the project-ID and the subscription-ID.
+
+```bash
+export GOOGLE_CLOUD_PROJECT='PROJECT_ID'
+export GOOGLE_PUBSUB_SUB_ID='SUBSCRIPTION_ID'
+```
 
 ## Usage
 
