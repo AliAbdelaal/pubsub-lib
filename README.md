@@ -6,11 +6,14 @@ A unified PubSub messaging module that supports Kafka and Google PubSub as backe
 
 ### Python environment
 
-Install a **`python3.7`** virtualenv and load the requirements.
+You need to clone the repo and create a python3.7 virtualenv as follows.
 
 ```bash
+$git clone https://github.com/AliAbdelaal/pubsub-lib.git
+$cd pubsub-lib/
 $python -m venv venv
 $source venv/bin/activate
+$pip install .
 ```
 
 ### Setup configurations
@@ -82,6 +85,8 @@ export GOOGLE_PUBSUB_SUB_ID='SUBSCRIPTION_ID'
 The library supports sending and receiving messages in bytes format with an optional string key, here is an example for a producer that sends images to a topic and a consumer that saves these images.
 
 ### Producer
+
+> You will need to install Pillow in order to try this example using `pip install Pillow`
 
 ```python
 # import necessary libs
