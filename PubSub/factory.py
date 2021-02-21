@@ -29,7 +29,7 @@ class PubSubFactory():
         self.vendor = vendor
         self.configs = json.load(open(os.getenv('PUBSUB_CONFIG_PATH')))
 
-    def create_consumer(self, topic_id: str, callback: Callable):
+    def create_consumer(self, topic_id: str, callback: Callable, gcp_subscription_id:str=None):
         """create a consumer object that listen on the given topic and apply
         the callable function.
 
@@ -39,6 +39,8 @@ class PubSubFactory():
             the topic ID to listen to.
         callback : Callable
             The function to apply if a message was received.
+        gcp_subscription_id : str
+            The subscription ID for the PubSub topic, this is only used with GCP as backend.
         """
         backend = None
         if self.vendor == 'kafka':
@@ -46,7 +48,7 @@ class PubSubFactory():
             Consumer(backend, callback)
         else:
             project_id = os.getenv("GOOGLE_CLOUD_PROJECT")
-            subscription_id = os.getenv("GOOGLE_PUBSUB_SUB_ID")
+            subscription_id = gcp_subscription_id
             backend = GooglePubSubClient(project_id=project_id, topic=topic_id,
                                          subscription_id=subscription_id, gcp_configs=self.configs, callback=callback)
             runner_thread = Thread(target=runner)

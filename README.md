@@ -73,11 +73,12 @@ You will need to setup the gcp configurations as follows.
     }
     ```
 
-Then you will need to export two keys as a system environment variables, `GOOGLE_CLOUD_PROJECT` and `GOOGLE_PUBSUB_SUB_ID` which will include the project-ID and the subscription-ID.
+Then you will need to export a system environment variables, `GOOGLE_CLOUD_PROJECT` which will include the project-ID.
+
+Also working with GCP as backend you will need to provide an additional argument `gcp_subscription_id` to the `PubSubFactory.create_consumer()` which is the subscription-id.
 
 ```bash
 export GOOGLE_CLOUD_PROJECT='PROJECT_ID'
-export GOOGLE_PUBSUB_SUB_ID='SUBSCRIPTION_ID'
 ```
 
 ## Usage
