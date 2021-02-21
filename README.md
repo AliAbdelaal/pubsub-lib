@@ -13,9 +13,13 @@ $python -m venv venv
 $source venv/bin/activate
 ```
 
-### Update configs file
+### Setup configurations
 
-Rename the `PubSub/configs.example.py` to `PubSub/configs.py` and add the corresponding configs based on the next steps.
+Create a `configs.json` file for the corresponding backend that you want to use, and set an environment variable with the path of the file as follows.
+
+```bash
+$export PUBSUB_CONFIG_PATH='path/to/configs.json'
+```
 
 ### Kafka installation
 
@@ -27,15 +31,17 @@ To use Kafka as a backend service, you will need to install Kafka, you can follo
 - [Kafka-Python explained in 10 lines of code](https://towardsdatascience.com/kafka-python-explained-in-10-lines-of-code-800e3e07dad1)
 - [Getting started with Apache Kafka in Python](https://towardsdatascience.com/getting-started-with-apache-kafka-in-python-604b3250aa05)
 
-Then you will need to setup Kafka configurations at `PubSub/configs.py` and edit the `kafka` dictionary.
+Then you will need to setup Kafka configurations file as follows.
 
-```python
-'kafka': {
-    'kafka_servers': [
-        'localhost:9092'
-    ]
-}
-```
+- Kafka config file:
+
+    ```json
+    {
+        "kafka_servers": [
+                "localhost:9092"
+            ]
+    }
+    ```
 
 ### Google PubSub Installation
 
@@ -45,22 +51,24 @@ To use Google PubSub you will need to setup a GCP account, create a new PubSub t
 
 You can follow [this video](https://youtu.be/f5DOsB7Nlw0) from the creators of Google PubSub to create a topic and a subscription.
 
-You will need to copy the credentials data to `PubSub/configs.py` under the key `gcp` as follows.
+You will need to setup the gcp configurations as follows.
 
-```json
-'gcp': {
-    "type": "YOUR_VALUE_GOES_HERE",
-    "project_id": "YOUR_VALUE_GOES_HERE",
-    "private_key_id": "YOUR_VALUE_GOES_HERE",
-    "private_key": "YOUR_VALUE_GOES_HERE",
-    "client_email": "YOUR_VALUE_GOES_HERE",
-    "client_id": "YOUR_VALUE_GOES_HERE",
-    "auth_uri": "YOUR_VALUE_GOES_HERE",
-    "token_uri": "YOUR_VALUE_GOES_HERE",
-    "auth_provider_x509_cert_url": "YOUR_VALUE_GOES_HERE",
-    "client_x509_cert_url": "YOUR_VALUE_GOES_HERE"
-}
-```
+- Google PubSub config file:
+
+    ```json
+    {
+        "type": "YOUR_VALUE_GOES_HERE",
+        "project_id": "YOUR_VALUE_GOES_HERE",
+        "private_key_id": "YOUR_VALUE_GOES_HERE",
+        "private_key": "YOUR_VALUE_GOES_HERE",
+        "client_email": "YOUR_VALUE_GOES_HERE",
+        "client_id": "YOUR_VALUE_GOES_HERE",
+        "auth_uri": "YOUR_VALUE_GOES_HERE",
+        "token_uri": "YOUR_VALUE_GOES_HERE",
+        "auth_provider_x509_cert_url": "YOUR_VALUE_GOES_HERE",
+        "client_x509_cert_url": "YOUR_VALUE_GOES_HERE"
+    }
+    ```
 
 Then you will need to export two keys as a system environment variables, `GOOGLE_CLOUD_PROJECT` and `GOOGLE_PUBSUB_SUB_ID` which will include the project-ID and the subscription-ID.
 

@@ -1,10 +1,10 @@
 import os
+import json
 from time import sleep
 from typing import Callable
 from threading import Thread
 from PubSub.consumer import Consumer
 from PubSub.producer import Producer
-from PubSub.configs import CONFIGS
 from PubSub.kafka_client import KafkaClient
 from PubSub.gcp_pubsub_client import GooglePubSubClient
 
@@ -23,11 +23,11 @@ class PubSubFactory():
         vendor : str
             The vendor to use, either 'kafka' or 'gcp'
         """
-        if vendor not in CONFIGS.keys():
+        if vendor not in ['gcp', 'kafka']:
             raise ValueError(
                 f"Vendor : `{vendor}` is not supported yet, only `kafka` and `gcp` are supported.")
         self.vendor = vendor
-        self.configs = CONFIGS[vendor]
+        self.configs = json.load(open(os.getenv('PUBSUB_CONFIG_PATH')))
 
     def create_consumer(self, topic_id: str, callback: Callable):
         """create a consumer object that listen on the given topic and apply
