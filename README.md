@@ -29,7 +29,7 @@ To use Kafka as a backend service, you will need to install Kafka, you can follo
 
 Then you will need to setup Kafka configurations at `PubSub/configs.py` and edit the `kafka` dictionary.
 
-```json
+```python
 'kafka': {
     'kafka_servers': [
         'localhost:9092'
